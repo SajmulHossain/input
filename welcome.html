@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .welcome-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .welcome-container h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h2>Welcome!</h2>
+        <p id="welcomeMessage"></p>
+    </div>
+
+    <script>
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const pairs = queryString.split('&');
+            pairs.forEach(pair => {
+                const [key, value] = pair.split('=');
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        const params = getQueryParams();
+        const firstName = params['firstName'];
+        const lastName = params['lastName'];
+        const email = params['email'];
+
+        if (firstName && lastName && email) {
+            document.getElementById('welcomeMessage').innerHTML = 
+                `Hello, ${firstName} ${lastName}!<br>Your email is: ${email}`;
+        } else {
+            document.getElementById('welcomeMessage').innerHTML = 'Welcome, Guest!';
+        }
+    </script>
+</body>
+</html>
